@@ -1,0 +1,77 @@
+<html>
+<head>
+	<title>vue + bootstrap</title>
+	<link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+	<style type="text/css">
+
+		* {
+		    margin: 0px;
+		    padding: 0px;
+		    font-family: 'LiSu';
+		    font-size: 16px !important;
+		}
+
+		#btngroup {
+			margin-left: 20px;
+			margin-top: 20px;
+		}
+
+	</style>
+</head>
+
+<body>
+	<div id="main">
+		<div class="input-group" v-if="status" style="margin-left:10px;margin-top:10px;		width:400px;">
+			<div class="input-group-addon">输入框</div>
+			<input v-model="input" type="text" class="form-control" 
+				placeholder="请输入内容" />
+		</div>
+		<div class="btn btn-default" type="button" style="margin-left:150px;
+			margin-top:10px;">
+			<div @click="toggle()" class="glyphicon glyphicon-search">{{ input }}</div>
+		</div>
+	</div>
+
+	<div @click.prevent id="btngroup" class="btn-group">
+		<div @click="makeActive('btn1')" class="btn btn-primary">按钮1</div>
+		<div @click="makeActive('btn2')" class="btn btn-success">按钮2</div>
+		<div @click="makeActive('btn3')" class="btn btn-warning">按钮3</div>
+		<br>
+		<p>当前选择的是：{{ select }}</p>
+	</div>
+	
+</body>
+
+<script type="text/javascript" src="js/jquery-2.1.4.js"></script>
+<script type="text/javascript" src="js/vue.js"></script>
+<script type="text/javascript" src="js/bootstrap.js"></script>
+<script type="text/javascript">
+	var vm = new Vue({
+		el: "#btngroup",
+		data: {
+			select: "未选择"
+		},
+		methods: {
+			makeActive: function(item) {
+				this.select = item;
+			}
+		}
+	});
+	var vm_main = new Vue({
+		el: "#main",
+		data: {
+			input: "请输入",
+			status: false
+		},
+		methods: {
+			hide: function() {
+				this.status = false;
+			},
+			toggle: function() {
+				this.status = !this.status;
+			}
+		}
+	})
+</script>
+
+</html>
